@@ -1,9 +1,9 @@
+/** @jsx React.DOM */
 var React = require('react');
 var $     = require('jquery');
 
 // view components
 var LoggedIn = require('./loggedIn');
-
 
 var App = React.createClass({
 

@@ -5,7 +5,8 @@ var request = require('superagent');
 var actions = Reflux.createActions({
     'listenToAlerts': {},
     'toggleStatus': {},
-    'addAlert': {}
+    'addAlert': {},
+    'retrieveItem': {}
 });
 
 actions.toggleStatus.preEmit = function(alert) {

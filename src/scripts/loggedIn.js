@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Alerts   = require('./components/alerts');
-var Search  = require('./components/search');
+var Search  = require('./components/search2');
 var LoggedIn = React.createClass({
 
 
