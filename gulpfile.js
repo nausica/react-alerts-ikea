@@ -1,6 +1,8 @@
 'use strict';
 
 var gulp       = require('gulp');
+var less       = require('gulp-less');
+var minifyCSS  = require('gulp-minify-css');
 var del        = require('del');
 var path       = require('path');
 var browserify = require('browserify');
@@ -25,23 +27,13 @@ function onError() {
 }
 
 
-// Styles
-gulp.task('styles', function() {
-    return gulp.src('src/styles/**/*')
-        .pipe($.plumber({
-            errorHandler: onError
-        }))
-        .pipe($.concat('main.scss'))
-        .pipe($.rubySass({
-            style: 'compressed',
-            precision: 10,
-            loadPath: ['src/bower_components']
-        }))
-        .pipe($.autoprefixer('last 3 versions'))
-        .pipe(gulp.dest('dist/styles'))
-        .pipe($.size());
+// Styles LESS > CSS
+gulp.task('styles', function(){
+    return gulp.src('src/styles/styles.less')
+        .pipe(less())
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('dist/styles'));
 });
-
 
 // Scripts
 gulp.task('scripts', function() {
