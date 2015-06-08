@@ -4,6 +4,9 @@ var Reflux      = require('reflux');
 var AlertsStore = require('../stores/alertsStore');
 var actions     = require('../actions/actions');
 
+var Panel = require('react-bootstrap').Panel;
+var Table = require('react-bootstrap').Table;
+
 var Alerts = React.createClass({
 
   mixins: [
@@ -31,33 +34,43 @@ var Alerts = React.createClass({
   },
 
   render: function() {
-    var rows = this.state.alerts.map(function(alert, i) {
-    return (
-    <tr key={i}>
-    <td>{alert.name}</td>
-    <td>{alert.code}</td>
-    <td>{alert.email}</td>
-    <td>{alert.active}</td>
-    </tr>
-    )
-  });
+    const title = (
+      <h3>My alerts</h3>
+    );
 
-  return (
-    <div>
-    <table className="table table-striped">
-      <thead>
-      <tr>
-      <th>Name</th>
-      <th>Code</th>
-      <th>Email</th>
-      <th>Active?</th>
-      </tr>
-      </thead>
-      <tbody>
-      {   rows }
-      </tbody>
-    </table>
-    </div>
+    var rows = this.state.alerts.map(function(alert, i) {
+      return (
+        <tr key={i}>
+        <td>{alert.name}</td>
+        <td>{alert.code}</td>
+        <td>{alert.email}</td>
+        <td>{alert.active}</td>
+        </tr>
+      )
+    });
+
+    return (
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div className="my-alerts-div center-block">
+            <Panel header={title}>
+              <Table responsive striped bordered>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Email</th>
+                    <th>Active?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                { rows }
+                </tbody>
+              </Table>
+            </Panel>
+          </div>
+        </div>
+      </div>
     )
   }
 });

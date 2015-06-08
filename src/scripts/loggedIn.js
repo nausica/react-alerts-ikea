@@ -27,7 +27,7 @@ var LoggedIn = React.createClass({
     if (this.state.profile) {
       return (
         <div>
-            <h2>Welcome {this.state.profile.nickname}</h2>
+            <h2>Welcome to Ikea Alerts, {this.state.profile.nickname}</h2>
             <Search profile={this.state.profile}/>
             <Alerts profile={this.state.profile}/>
         </div>
@@ -39,17 +39,5 @@ var LoggedIn = React.createClass({
     }
   }
 });
-var tableData=[
-{
-    name:'Paul Shan',
-    roll: '001'
-},
-{
-    name:'John Doe',
-    roll: '002'
-},
-{
-    name:'Sachin Tendulkar',
-    roll: '003'
-}];
+
 module.exports = LoggedIn;

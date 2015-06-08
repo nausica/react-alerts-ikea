@@ -49,11 +49,7 @@ var alertsStore  = Reflux.createStore({
 
   // callback for toggle action
   toggle: function(alert) {
-    console.log('toggle');
-    console.log(alert);
-    console.log(_alerts );
     var alert = _.where(_alerts, { '_id': alert._id })[0];
-    console.log(  alert );
     // toggle the alert status in the obect
     alert.active = alert.active === 'Yes' ? 'No' : 'Yes';
     // pass the data on to any listeners -- see toggleStatus in view.js)

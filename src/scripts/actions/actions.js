@@ -14,6 +14,8 @@ actions.toggleStatus.preEmit = function(alert) {
 
 }
 actions.addAlert.preEmit = function (alert) {
+    console.log('addAlert preEmit');
+    console.log(alert);
     request.post('http://localhost:3000', alert, function () {console.log("done")});
 };
 

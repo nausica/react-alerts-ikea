@@ -8,13 +8,19 @@ var Input = require('react-bootstrap').Input;
 
 var SelectedItem = React.createClass({
   handleClick: function(e) {
-
+    console.log('button clicked');
+    this.props.addAlert();
   },
   render: function() {
     return (
-      <div>
-        <img src={this.props.item.url} border="0" alt={this.props.item.name} title={this.props.item.name} width="300" height="200" class="zoomMousePointer"/>
-        <Button onClick={this.handleClick} bsStyle='primary'>Add Alert</Button>
+      <div className="selected-div center-block">
+        <div className="display-div" title={this.props.item.name}>
+            <img src={this.props.item.url} border="0" alt={this.props.item.name} title={this.props.item.name} class="zoomMousePointer"/>
+        </div>
+        <div className="pull-right">
+            <Button onClick={this.handleClick} disabled={this.props.item.disabled}>Add Alert</Button>
+        </div>
+        <div className="clearfix"/>
       </div>
     );
   }
@@ -55,23 +61,37 @@ var Search = React.createClass({
     this.setState(newState);
   },
 
+  addAlert: function() {
+    console.log('add Alert parent');
+    var alert = {};
+    alert.name = this.state.item.name;
+    alert.code = this.state.query;
+    alert.email = this.props.profile.email;
+    alert.active = 'Yes';
+    // Add code + email
+    actions.addAlert(alert);
+  },
+
   render: function() {
     console.log(this.state.item)
     return (
-      <div>
-        <Input
-            type='text'
-            value={this.props.query}
-            placeholder='Enter code here'
-            //label='Working example with validation'
-            help='e.g. 00173901'
-            bsStyle={this.validationState()}
-            hasFeedback
-            ref='searchInput'
-            groupClassName='group-class'
-            labelClassName='label-class'
-            onChange={this.handleChange} />
-        <SelectedItem item={this.state.item}/>
+        <div>
+            <div className="search-box">
+                <div className="query-div center-block">
+                    <Input
+                        type='text'
+                        value={this.props.query}
+                        placeholder='Create an alert for...'
+                        help='e.g. 00173901'
+                        bsStyle={this.validationState()}
+                        hasFeedback
+                        ref='searchInput'
+                        groupClassName='group-class'
+                        labelClassName='label-class'
+                        onChange={this.handleChange} />
+                </div>
+            </div>
+        <SelectedItem item={this.state.item} addAlert={this.addAlert}/>
       </div>
     );
   }
