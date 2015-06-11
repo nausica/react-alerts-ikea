@@ -7,15 +7,16 @@ var Button = require('react-bootstrap').Button;
 var Input = require('react-bootstrap').Input;
 
 var SelectedItem = React.createClass({
+
   handleClick: function(e) {
-    console.log('button clicked');
     this.props.addAlert();
   },
+
   render: function() {
     return (
       <div className="selected-div center-block">
         <div className="display-div" title={this.props.item.name}>
-            <img src={this.props.item.url} border="0" alt={this.props.item.name} title={this.props.item.name} class="zoomMousePointer"/>
+            <img src={this.props.item.url} border="0" alt={this.props.item.name} title={this.props.item.name} width="400px" height="400px" class="zoomMousePointer"/>
         </div>
         <div className="pull-right">
             <Button onClick={this.handleClick} disabled={this.props.item.disabled}>Add Alert</Button>
@@ -62,18 +63,16 @@ var Search = React.createClass({
   },
 
   addAlert: function() {
-    console.log('add Alert parent');
     var alert = {};
     alert.name = this.state.item.name;
     alert.code = this.state.query;
     alert.email = this.props.profile.email;
-    alert.active = 'Yes';
+    alert.active = true;
     // Add code + email
     actions.addAlert(alert);
   },
 
   render: function() {
-    console.log(this.state.item)
     return (
         <div>
             <div className="search-box">
@@ -87,8 +86,9 @@ var Search = React.createClass({
                         hasFeedback
                         ref='searchInput'
                         groupClassName='group-class'
-                        labelClassName='label-class'
-                        onChange={this.handleChange} />
+                        labelClassName='label-class' />
+                    <Button onClick={this.handleChange}>Search</Button>
+
                 </div>
             </div>
         <SelectedItem item={this.state.item} addAlert={this.addAlert}/>

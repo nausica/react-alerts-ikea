@@ -6,6 +6,7 @@ var actions     = require('../actions/actions');
 
 var Panel = require('react-bootstrap').Panel;
 var Table = require('react-bootstrap').Table;
+var Toggle = require('react-toggle');
 
 var Alerts = React.createClass({
 
@@ -22,7 +23,6 @@ var Alerts = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log(this.props.profile)
     actions.listenToAlerts(this.props.profile.email);
   },
 
@@ -38,13 +38,21 @@ var Alerts = React.createClass({
       <h3>My alerts</h3>
     );
 
+    console.log('render');
+    console.log(this.state.alerts);
+
     var rows = this.state.alerts.map(function(alert, i) {
       return (
         <tr key={i}>
         <td>{alert.name}</td>
         <td>{alert.code}</td>
         <td>{alert.email}</td>
-        <td>{alert.active}</td>
+        <td>
+          <Toggle
+          defaultChecked={alert.active}
+          aria-label="No label tag"
+          onChange={actions.toggleStatus.bind(this, alert)}/>
+        </td>
         </tr>
       )
     });
