@@ -49,10 +49,11 @@ var Search = React.createClass({
   },
 
   handleChange: function() {
+    var query =  this.refs.searchInput.getValue();
     this.setState({
-      query: this.refs.searchInput.getValue()
+      query: query
     });
-    actions.retrieveItem(this.state.query);
+    actions.retrieveItem(query);
   },
 
   onItemUpdate: function(itemData) {

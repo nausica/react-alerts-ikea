@@ -28,7 +28,7 @@ var alertsStore  = Reflux.createStore({
   listenToAlerts: function(param) {
     var self = this;
     request
-    .get('http://localhost:3000/'+param)
+    .get('http://localhost:3000/?email='+param)
     .set({ Accept: 'application/json' })
     .end(function(response) {
       _alerts = response.body;
